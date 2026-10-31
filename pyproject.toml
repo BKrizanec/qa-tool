@@ -1,0 +1,29 @@
+[project]
+name = "qa-tool"
+version = "0.1.0"
+description = "MCP server that audits what legacy test suites really verify"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=2.3,<3",
+    "tree-sitter>=0.25",
+    "tree-sitter-java>=0.23",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+qa-tool-mcp = "qa_tool.server:main"
+qa-tool-audit = "qa_tool.audit.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/qa_tool"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
